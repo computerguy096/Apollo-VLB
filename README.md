@@ -1,93 +1,49 @@
-# Apollo VLB
+# Prometheus VLB - an affordable way to get a fast video card for your VLB systems
+
+This is an open source video card, designed to be used in systems with a VLB slot, like a 486 class machine. It's designed around the S3 Trio64V+ video chip (86C765), which can be found in many PCI video cards, as wel as separately.
+As a bonus, this particular chip allows for a very easy implementation for the VL bus, with almost no support components required, even the RAMDAC is built into the chip.
+The card was designed from scratch, using only the official datasheet and photos of an STB Powergraph 64 for a few visual references.
+
+![Prometheus VLB rev 1A PCBs](images/prometheus.jpg)
+
+## Features
+
+- S3 Trio64V+ (86C765) or S3 ViRGE (86C325)[^1] video chip, with a powerful and very compatible 2D core, perfect for most DOS games
+- up to 2MB of fast page or EDO memory, with clearance for SOJ sockets
+- configurable address range, with 32MB, 64MB and 1024MB as options
+- simple design, built in RAMDAC, only requires a few extra parts
+- fully configurable registers with pull-downs, allowing the tuning of various parameters like memory timings, etc.
+- flexible EEPROM implementation, allows DIP28, DIP32, as well as PLCC32 footprints
+- common VGA connector placement, allows reusability for many of the old metallic brackets
+- small PCB, which does not extend below the card edge in the front, so it will not collide with keyboard controller chips on some boards
+
+![Prometheus VLB rev 1B rendered PCB](images/kicad_PCB.JPG)
+
+## Documentation
+
+Trio64V+ datasheet can be read [here](docs/DB018-A_Trio64V+_Integrated_Graphics_Video_Accelerator_Jul95.pdf), and the ViRGE datasheet [here](docs/DB019-B_ViRGE_Integrated_3D_Accelerator_Aug1996.pdf).
+
+## FAQ
+
+**Q: Is this for sale? Where can I buy one?**
+
+> Nope, it's not for sale, and I do not have any intentions to sell them. However, I am an advocate for open source hardware so the design is fully public (the gerbers, the schematic, everything, all provided under GPLv3) so you can build your own card freely.
+
+**Q: What parts do I need to build a card?**
+
+> There is a [CSV BOM](kicad/virge-vlb.csv) included, as well as an [interactive HTML BOM](kicad/bom/ibom.html), with all the parts and their quantities listed. The main thing to acquire is the S3 chip itself, which can be salvaged from PCI cards or bought as NOS trays. 
+**Be careful with the chip model, only 86C765 and 86C325 are fully pin compatible and will work!**
+
+**Q: What about the video BIOS?**
+
+> The binary is from an STB Powergraph64 (closest card to this one in terms of design) and it is available in the repository right [here](VBIOS.BIN)
+
+**Q: Where can i find the gerber files?**
+
+> At `/kicad/gerber` on this repo.
+
+## Footnotes
+
+[^1]: S3 ViRGE support is experimental in VLB mode, since there are no drivers available for it.
 
 
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.com/ultimateretro/apollo-vlb.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.com/ultimateretro/apollo-vlb/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
